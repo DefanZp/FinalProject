@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+  font-family: "Inter";
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.Pagination { 
+  position: absolute;
+  bottom: -40px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.Pagination .splide__pagination__page.is-active{
+
+    background: black;
+    transform: scale(1.4);
+    z-index: 1;
+
+}
+
+.Arrows .splide__arrow {
+    align-items: center;
+    background: #fff;
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    height: 2em;
+    justify-content: center;
+    opacity: .7;
+    padding: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2em;
+    z-index: 1;
+    
+}
+
+
+.Arrows .splide__arrow svg {
+    fill: black;
+    height: 1.2em;
+    width: 1.2em;
+}
+
+.Pagination_number {
+  position: absolute;
+  bottom: -60px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.Pagination_number .splide__pagination__page {
+    color: black;
+    background: white;
+    border: 0;
+    border-radius: 0%;
+    display: inline-block;
+    height: 35px;
+    margin: 3px;
+    opacity: .7;
+    padding: 0px;
+    position: relative;
+    transition: transform .2s linear;
+    width: 35px;
+    text-align: center;
+}
+
+.Pagination_number .splide__pagination__page:hover {
+  color: white;
+  background: black;
+}
+
+.Pagination_number .splide__pagination__page.is-active {
+  color: white;
+  background: black;
+  transform: none;
+  z-index: 1;
+}
+
+
