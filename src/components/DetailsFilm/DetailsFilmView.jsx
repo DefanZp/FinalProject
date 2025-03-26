@@ -32,6 +32,15 @@ const DetailsFilmView = ({
                       arrows:false,
                       classes: {
                         pagination: 'Pagination_number',
+                      },
+                      breakpoints: {
+                        640: {
+                          perPage: 2,
+                        },
+                        1200: {
+                          perPage: 3,
+                        }
+
                       }
                     }}
 
@@ -89,6 +98,15 @@ const DetailsFilmView = ({
                       classes: {
                         pagination: 'Pagination',
                         arrows: 'Arrows',
+                      },
+                      breakpoints: {
+                        640: {
+                          perPage: 1,
+                        },
+                        1200: {
+                          perPage: 2,
+                        }
+
                       }
                     }}
                   >

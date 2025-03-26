@@ -24,6 +24,15 @@ const CardsPopularView = ({ data, loading }) => {
           classes: {
             pagination: 'Pagination',
             arrows: 'Arrows',
+          },
+          breakpoints: {
+            640: {
+              perPage: 2,
+            },
+            1200: {
+              perPage: 3,
+            }
+
           }
         }}
       >

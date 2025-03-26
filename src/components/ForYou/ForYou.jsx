@@ -17,6 +17,22 @@ const ForYou = () => {
 
     const fetchFavorite = async () => {
         try {
+
+
+          if (!accountId || !sessionId) {
+            
+            const response = await axios.get(
+              `https://api.themoviedb.org/3/movie/popular?language=en-US&page=1`,
+              {
+                headers: {
+                  Authorization: `Bearer ${import.meta.env.VITE_TMDB_BEARER_TOKEN}`,
+                }
+              }
+            )
+
+            dispatch(fetchSuccess(response.data.results));
+            return;
+          }
           const response = await axios.get(
             `https://api.themoviedb.org/3/account/${accountId}/favorite/movies?language=en-US&page=1&session_id=${sessionId}&sort_by=created_at.asc`,
             {
