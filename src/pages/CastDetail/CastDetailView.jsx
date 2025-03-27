@@ -9,32 +9,34 @@ const CastDetailView = ({ cast, loading, error, movieCast, movieLoading, movieEr
       <Navbar />
 
       <section className="pt-16">
-        <div className="container flex flex-row max-w-full px-28 gap-16">
-          <div className=" w-[30%]  rounded-lg ">
+        <div className="container flex flex-row  flex-wrap max-w-full px-6 lg:px-28 gap-y-6 lg:gap-y-0 ">
+          <div className=" w-[100%] flex flex-col items-center lg:items-start  lg:w-[30%]  rounded-lg ">
             <img
               src={
                 cast.profile_path
                   ? `https://image.tmdb.org/t/p/w500${cast?.profile_path}`
                   : "https://149348893.v2.pressablecdn.com/wp-content/uploads/2019/03/no-image-available.png"
               }
-              className="w-full h-96 object-cover rounded-lg shadow-xl"
+              className="min-w-64 h-96 mb-5 lg:mb-0 object-cover rounded-lg shadow-xl"
             />
-            <h1 className="text-lg font-semibold mt-5">Place Of Birth</h1>
-            <p className="mb-4 text-sm">
+            <h1 className="self-start text-lg font-semibold mt-5">Place Of Birth</h1>
+            <p className=" self-start mb-4 text-sm">
               {cast?.place_of_birth && cast?.place_of_birth.length > 24
                 ? `${cast?.place_of_birth.slice(0, 24)}...`
                 : cast?.place_of_birth}
             </p>
-            <h1 className="text-lg font-semibold ">Birthday</h1>
-            <p className="text-sm mb-4">{cast?.birthday}</p>
+            <h1 className="self-start text-lg font-semibold ">Birthday</h1>
+            <p className=" self-start text-sm mb-4">{cast?.birthday}</p>
 
-            <h1 className="text-lg font-semibold ">Gender</h1>
+            <h1 className="self-start text-lg font-semibold ">Gender</h1>
+            <p className="self-start mb-4 text-sm">
             {cast?.gender === 1 ? "Female"
               : cast?.gender === 2 ? "Male"
               : "Unknown"}
+            </p>  
           </div>
 
-          <div className="w-[70%]">
+          <div className="w-[100%] lg:w-[70%] ">
             <div className="flex flex-row items-center mt-4 mb-8 gap-2">
               <p className="text-3xl font-semibold ">{cast?.name}</p>
               <p className="text-xl bg-black text-white font-medium py-1 px-2">

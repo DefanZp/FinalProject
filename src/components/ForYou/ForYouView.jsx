@@ -17,7 +17,7 @@ const ForYouView = ({data}) => {
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
         }}
-        className="flex flex-col min-w-[480px] h-44 justify-end p-4">
+        className="flex flex-col min-w-[372px] lg:min-w-[480px] h-44 justify-end p-4">
         <div className='flex flex-row items-center justify-between'>
         <div className='flex flex-col gap-1'>
         <div className='flex flex-row gap-3'>

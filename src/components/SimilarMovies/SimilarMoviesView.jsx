@@ -6,7 +6,7 @@ import "@splidejs/react-splide/css";
 const SimilarMoviesView = ({ data, loading, error, collection }) => {
   return (
     <section className="">
-      <div className="container flex flex-col max-w-full px-28 ">
+      <div className="container flex flex-col max-w-full px-6 lg:px-28 ">
         <h1 className="text-2xl font-semibold mb-8 text-center">
           Related Movie
         </h1>
@@ -18,6 +18,15 @@ const SimilarMoviesView = ({ data, loading, error, collection }) => {
                       classes: {
                         pagination: 'Pagination',
                         arrows: 'Arrows',
+                      },
+                      breakpoints: {
+                        640: {
+                          perPage: 1,
+                        },
+                        1200: {
+                          perPage: 3,
+                        }
+
                       }
                     }}
                   >
@@ -26,7 +35,7 @@ const SimilarMoviesView = ({ data, loading, error, collection }) => {
             <>
               <SplideSlide>
               <Link to={`/detail/${collection.id}`}>
-                <div className="flex flex-col min-w-64 shadow-md rounded-md">
+                <div className="flex flex-col min-w-60 lg:min-w-64 shadow-md rounded-md">
                   <img
                     src={
                       collection.backdrop_path
@@ -35,7 +44,7 @@ const SimilarMoviesView = ({ data, loading, error, collection }) => {
                     }
                     className="w-full h-44 object-cover rounded-md shadow-md bg-center"
                   />
-                  <h1 className="text-base font-medium pl-2 py-2 ">
+                  <h1 className="text-center lg:text-start text-base font-medium pl-2 py-2 ">
                     {collection.title && collection.title.length > 24
                       ? `${collection.title.slice(0, 24)}...`
                       : collection.title}
@@ -50,7 +59,7 @@ const SimilarMoviesView = ({ data, loading, error, collection }) => {
             <>
             <SplideSlide>
               <Link to={`/detail/${movie.id}`}>
-                <div className="flex flex-col min-w-64 shadow-md rounded-md">
+                <div className="flex flex-col min-w-60 lg:min-w-64 shadow-md rounded-md">
                   <img
                     src={
                       movie.backdrop_path
@@ -59,7 +68,7 @@ const SimilarMoviesView = ({ data, loading, error, collection }) => {
                     }
                     className="w-full h-44 object-cover rounded-md shadow-md bg-center"
                   />
-                  <h1 className="text-base font-medium pl-2 py-2 ">
+                  <h1 className="text-center lg:text-start text-base font-medium pl-2 py-2 ">
                     {movie.title && movie.title.length > 24
                       ? `${movie.title.slice(0, 24)}...`
                       : movie.title}

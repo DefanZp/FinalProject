@@ -11,7 +11,6 @@ const CardsNowView = ({ data, loading, }) => {
   
   return (
     <section className="container pt-9 mb-9 ">
-      <div className="w-full"></div>
 
 
       <div className="mb-6">
@@ -33,7 +32,7 @@ const CardsNowView = ({ data, loading, }) => {
               perPage: 2,
             },
             1200: {
-              perPage: 3,
+              perPage: 4,
             }
 
           }
@@ -44,10 +43,13 @@ const CardsNowView = ({ data, loading, }) => {
         ) : (
           data?.results?.map((movie) => (
             <SplideSlide
+            options ={{
+              gap: '1rem',
+            }}
             >
             <Link to={`/detail/${movie.id}`}>
               <div
-                className="flex-none w-48 h-60 rounded-md "
+                className="flex-none w-44 h-60 lg:w-48 lg:h-60 rounded-md "
                 style={{
                   backgroundImage: movie.backdrop_path 
                   ? `linear-gradient(to bottom, rgba(0,0,0,0) 30%, rgba(0,0,0,0.7) 100%), url(https://image.tmdb.org/t/p/w500${movie.backdrop_path})`

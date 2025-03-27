@@ -25,6 +25,8 @@ body {
   width: 100%;
 }
 
+
+
 .Pagination .splide__pagination__page.is-active{
 
     background: black;
@@ -94,6 +96,20 @@ body {
   background: black;
   transform: none;
   z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .Pagination_number {
+    overflow-x: scroll;
+    justify-content: flex-start;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .Pagination {
+    display: none;
+
+  }
 }
 
 

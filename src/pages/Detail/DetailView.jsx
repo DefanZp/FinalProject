@@ -91,8 +91,8 @@ const DetailView = ({
                     >
                       <path
                         stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                         stroke-width="2"
                         d="M8 18V6l8 6-8 6Z"
                       />

@@ -48,13 +48,14 @@ const ForYou = () => {
           
          
           const movieId = response.data.results.map((movie) => movie.id);
-          dispatch(fetchIdSuccess(movieId));
+          const randomMovieId = movieId[Math.floor(Math.random() * movieId.length)];
+          console.log(randomMovieId);
+          dispatch(fetchIdSuccess(randomMovieId));
         
 
-          movieId.forEach(async (id) => {
-            try {
+          
               const recommendationResponse = await axios.get(
-                `https://api.themoviedb.org/3/movie/${id}/recommendations?language=en-US&page=1`,
+                `https://api.themoviedb.org/3/movie/${randomMovieId}/recommendations?language=en-US&page=1`,
                 {
                   headers: {
                     Authorization: `Bearer ${import.meta.env.VITE_TMDB_BEARER_TOKEN}`,
@@ -63,10 +64,8 @@ const ForYou = () => {
               );
     
               dispatch(fetchSuccess(recommendationResponse.data.results));
-            } catch (error) {
-              toast.error("Gagal memuat rekomendasi.", error);
-            }
-          });
+              console.log(recommendationResponse.data.results);
+            
         } catch (error) {
           toast.error("Gagal memuat daftar Favorit.", error);
         }
