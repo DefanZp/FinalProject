@@ -10,7 +10,7 @@ const MegaView = ({ loading, movies, error }) => {
         type: "loop",
         perPage: 1,
         autoplay: true,
-        interval: 7000,
+        interval: 6000,
         arrows: false,
         height: "70vh",
         breakpoints: {
@@ -19,6 +19,31 @@ const MegaView = ({ loading, movies, error }) => {
         },
       }}
     >
+
+      {loading ? (
+        <SplideSlide className="relative flex items-end justify-start">
+       
+        <div className="absolute inset-0 w-full h-full bg-gray-800 "></div> 
+       
+        <div className="relative z-10 p-6 pb-10 md:p-10 md:pb-16 lg:p-16 lg:pb-20 w-full max-w-3xl animate-pulse">
+          <div className="h-8 bg-gray-500 rounded w-3/4 mb-4"></div>
+  
+      
+          <div className="space-y-3 mb-8">
+            <div className="h-4 bg-gray-500 rounded w-full"></div>
+            <div className="h-4 bg-gray-500 rounded w-5/6"></div>
+            <div className="h-4 bg-gray-500 rounded w-full"></div>
+            <div className="h-4 bg-gray-500 rounded w-4/6"></div>
+          </div>
+        
+          <div className="flex gap-4 justify-left mt-8">
+            <div className="h-10 w-28 bg-gray-500 rounded-lg"></div>
+          </div>
+        </div>
+      </SplideSlide>
+      
+      ):
+      (<>
       {movies.map((movie) => (
         <SplideSlide
           key={movie.id}
@@ -57,6 +82,8 @@ const MegaView = ({ loading, movies, error }) => {
           </div>
         </SplideSlide>
       ))}
+      </>)} 
+      
     </Splide>
   );
 };
