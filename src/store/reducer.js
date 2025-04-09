@@ -15,6 +15,7 @@ import castMovieReducer from "./Cast/CastMovieSlice"
 import similarMoviesReducer from "./SimilarMovies/SimilarMoviesSlice"
 import collectionMoviesReducer from "./CollectionMovies/CollectionMoviesSlice"
 import forYouReducer from "./ForYou/ForYouSlice"
+import megaReducer from "./Mega/MegaSlice"
 
 const reducer = combineReducers({
   data: dataReducer,
@@ -33,6 +34,7 @@ const reducer = combineReducers({
   similarMovies: similarMoviesReducer,
   collectionMovies: collectionMoviesReducer,
   forYou: forYouReducer,
+  mega: megaReducer,
 });
 
 export default reducer;
