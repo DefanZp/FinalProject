@@ -1,8 +1,10 @@
 import React from 'react';
-
+import Navbar from '../../components/Navbar/Navbar';
 const LoginView = ({ username, password, setUsername, setPassword, handleLogin }) => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white">
+    <>
+    <Navbar />
+    <div className="min-h-screen flex items-center justify-center bg-white px-6 lg:px-0">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md border border-gray-200">
         <h2 className="text-3xl font-bold text-center mb-6 text-gray-900">Login with TMDB</h2>
         
@@ -40,6 +42,7 @@ const LoginView = ({ username, password, setUsername, setPassword, handleLogin }
 
       </div>
     </div>
+    </>
   );
 };
 

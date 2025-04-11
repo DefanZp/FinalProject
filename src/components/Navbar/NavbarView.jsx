@@ -1,4 +1,4 @@
-// NavbarView.jsx
+
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -9,13 +9,16 @@ const NavbarView = ({
   handleLogout,
   isAuthenticated,
   username,
+  isScrolled,
 }) => {
   return (
-    <nav className="container-fluid bg-white shadow-md">
+    <nav className={`container-fluid transition-all duration-300 ease-in-out
+    ${ isScrolled ? "text-black bg-[#FFFFFF99] shadow-md backdrop-blur-lg" : "text-black bg-white shadow-md" }
+    fixed top-0 left-0 right-0 z-50`}>
       <div className="flex flex-row justify-between items-center py-4 px-6 lg:px-28">
         <Link to={"/"}>
         <svg
-          className=" w-9 h-9 text-gray-800 dark:text-white"
+          className={`w-9 h-9 ${ isScrolled ? "text-gray-800 dark:text-white" : "text-gray-800 dark:text-gray-800"}`}
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -54,7 +57,8 @@ const NavbarView = ({
         <div className="flex gap-4 lg:gap-8">
           <Link to={"/search"}>
             <svg
-              className="hidden lg:block w-6 h-6 text-gray-800 dark:text-white"
+              className={`hidden lg:block w-6 h-6
+            ${ isScrolled ? "text-gray-800 dark:text-white" : "text-gray-800 dark:text-gray-800"}`}
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -71,7 +75,8 @@ const NavbarView = ({
             </svg>
           </Link>
           <svg
-            className="hidden lg:blockw-6 h-6 text-gray-800 dark:text-white"
+            className={`hidden lg:blockw-6 h-6
+          ${ isScrolled ? "text-gray-800 dark:text-white" : "text-gray-800 dark:text-gray-800"}`}
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -90,7 +95,9 @@ const NavbarView = ({
           {!isAuthenticated ? (
             <Link to={"/login"}>
               <svg
-                className="hidden lg:block w-6 h-6 text-gray-800 dark:text-white cursor-pointer"
+                className={`hidden lg:block w-6 h-6
+                ${ isScrolled ? "text-gray-800 dark:text-white" : "text-gray-800 dark:text-gray-800"}
+               cursor-pointer`}
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -114,7 +121,8 @@ const NavbarView = ({
             <svg
               onClick={handleLogout}
               cursor={"pointer"}
-              className="w-6 h-6 text-gray-800 dark:text-white"
+              className={`w-6 h-6 
+               ${ isScrolled ? "text-gray-800 dark:text-white" : "text-gray-800 dark:text-gray-800"} `}
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               width="24"

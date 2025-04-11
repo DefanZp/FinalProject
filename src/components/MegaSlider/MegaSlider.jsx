@@ -11,20 +11,17 @@ const MegaSlider = () => {
   useEffect(() => {
     const fetchAllMovieDetails = async () => {
 
-      const options = {
-        method: "GET",
-        headers: {
-          accept: "application/json",
-          Authorization: `Bearer ${import.meta.env.VITE_TMDB_BEARER_TOKEN}`,
-        },
-      };
-
       try {
 
-        const listResponse = await axios.request({
-          ...options,
-          url: "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
-        });
+        const listResponse = await axios.get(
+          `https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1`,
+          {
+            headers: {
+              accept: "application/json",
+              Authorization: `Bearer ${import.meta.env.VITE_TMDB_BEARER_TOKEN}`,
+            },
+          }
+        );
 
         const initialMovies = listResponse.data.results;
 
@@ -35,14 +32,24 @@ const MegaSlider = () => {
             try {
              
               const [detailsResponse, videosResponse] = await Promise.all([
-                axios.request({
-                  ...options,
-                  url: `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`,
-                }),
-                axios.request({
-                  ...options,
-                  url: `https://api.themoviedb.org/3/movie/${movieId}/videos`,
-                }),
+                axios.get(
+                 `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`,
+                 {
+                  headers: {
+                    accept: "application/json",
+                    Authorization: `Bearer ${import.meta.env.VITE_TMDB_BEARER_TOKEN}`,
+                  },
+                 }
+                ),
+                axios.get(
+               `https://api.themoviedb.org/3/movie/${movieId}/videos`,
+               {
+                headers: {
+                  accept: "application/json",
+                  Authorization: `Bearer ${import.meta.env.VITE_TMDB_BEARER_TOKEN}`,
+                },
+               }
+                ),
               ]);
 
           

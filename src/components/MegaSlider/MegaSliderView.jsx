@@ -1,11 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
+import "../../index.css";
 import "@splidejs/react-splide/css";
 
 const MegaView = ({ loading, movies, error }) => {
   return (
     <Splide
+      className="mt-5"
       options={{
         type: "loop",
         perPage: 1,
@@ -14,14 +16,21 @@ const MegaView = ({ loading, movies, error }) => {
         arrows: false,
         height: "70vh",
         breakpoints: {
-          768: { height: "50vh" },
+          768: {
+           height: "50vh", 
+           pagination: false, 
+          },
           640: { height: "40vh" },
         },
+        classes: {
+            pagination: "Mega-Pagination"
+        }
       }}
     >
 
       {loading ? (
-        <SplideSlide className="relative flex items-end justify-start">
+        <SplideSlide 
+        className="relative flex items-end justify-start ">
        
         <div className="absolute inset-0 w-full h-full bg-gray-800 "></div> 
        

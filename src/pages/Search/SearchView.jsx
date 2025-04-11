@@ -18,7 +18,7 @@ const SearchView = ({
   return (
     <>
     <Navbar />
-      <section className="pt-7">
+      <section className="pt-20">
         <div
           className="container max-w-full py-9 px-6 lg:px-28 flex flex-col "
         >
@@ -90,7 +90,7 @@ const SearchView = ({
           <p>Loading...</p>
         ) : (
           <>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 place-items-center gap-y-8  px-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 place-items-center gap-y-8 px-2 lg:px-6">
               {filteredData.map((movie) => (
                 <Link to={`/detail/${movie.id} `}>
                   <div

@@ -112,4 +112,13 @@ body {
   }
 }
 
+.Mega-Pagination { 
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  bottom: 20px;
+}
+
 

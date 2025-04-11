@@ -1,105 +1,107 @@
-import React from 'react'
-import SimilarMoviesView from './SimilarMoviesView'
-import axios from 'axios'
-import { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import {fetchSuccess} from "../../store/SimilarMovies/SimilarMoviesSlice"
-import { fetchSuccess as fetchCollectionSuccess, fetchIdSuccess } from '../../store/CollectionMovies/CollectionMoviesSlice'
-import { Link, useParams } from 'react-router-dom'
+import React, { useEffect } from 'react';
+import SimilarMoviesView from './SimilarMoviesView';
+import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
+import {  fetchSuccess,fetchCollectionId } from "../../store/SimilarMovies/SimilarMoviesSlice";
+import { useParams } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const SimilarMovies = () => {
+  const dispatch = useDispatch();
+  const { id } = useParams();
+  const { data: combinedRelatedMovies, loading, error, collectionId } = useSelector((state) => state.similarMovies);
 
-const dispatch = useDispatch();
-const {id} = useParams();
-const {data, loading, error} = useSelector((state) => state.similarMovies);
-const {data: collection,movieId } = useSelector((state) => state.collectionMovies);
+  const fetchMovies = async () => {
 
-
-
-useEffect(() => {
-
-    const fetchMovieDetails = async () => {
-        try {
-          
-          const response = await axios.get(`https://api.themoviedb.org/3/movie/${id}?language=en-US`, {
-            headers: {
-              accept: "application/json",
-              Authorization: `Bearer ${import.meta.env.VITE_TMDB_BEARER_TOKEN}`,
-            },
-          });
-    
-      
-            dispatch(fetchIdSuccess(response.data?.belongs_to_collection?.id))
-          
-        } catch (error) {
-          dispatch({ type: "collectionMovies/fetchError", payload: error.message });
-        }
-    
-      
-      };
-
-    
-      
-    const fetchSimilarMovies = async () => {
-        try {
-            const response = await axios.get(
-                `https://api.themoviedb.org/3/movie/${id}/similar?language=en-US&page=1`,
-                {
-                    headers: {
-                      accept: "application/json",
-                      Authorization: `Bearer ${import.meta.env.VITE_TMDB_BEARER_TOKEN}`,
-                    },
-
-                }
-            );
-
-            dispatch(fetchSuccess(response.data.results));
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    fetchMovieDetails();
-    fetchSimilarMovies();
-} , [dispatch, id, movieId])
-
-
-useEffect(() => {
-
-  const fetchCollectionMovies = async () => {
     try {
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/collection/${movieId}?language=en-US`,
+
+      try {
+        const detailsResponse = await axios.get(
+        `https://api.themoviedb.org/3/movie/${id}?language=en-US`,
         {
           headers: {
             accept: "application/json",
             Authorization: `Bearer ${import.meta.env.VITE_TMDB_BEARER_TOKEN}`,
           },
-        }
+        }  
       );
-  
-      dispatch(fetchCollectionSuccess(response.data.parts));
+        dispatch(fetchCollectionId(detailsResponse.data?.belongs_to_collection?.id))
+      } catch (error) {
+        toast.error("Gagal memuat collectionId."),error;
+      }
+
+      
+      const moviePromise = [
+        axios.get(
+        `https://api.themoviedb.org/3/movie/${id}/similar?language=en-US&page=1`, 
+        {
+          headers: {
+            accept: "application/json",
+            Authorization: `Bearer ${import.meta.env.VITE_TMDB_BEARER_TOKEN}`,
+          },
+        }  
+      )
+      ];
+
+      if (collectionId) {
+        moviePromise.push(
+          axios.get(
+          `https://api.themoviedb.org/3/collection/${collectionId}?language=en-US`, 
+          {
+            headers: {
+              accept: "application/json",
+              Authorization: `Bearer ${import.meta.env.VITE_TMDB_BEARER_TOKEN}`,
+            },
+          }  
+        )
+        );
+      }
+
+      // menyimpan ke array results
+      const results = await Promise.all(moviePromise);
+
+      const similarResponse = results[0]; 
+      const similarMovies = similarResponse?.data?.results ;
+      console.log(similarMovies);
+
+      let collectionMovies = [];
+
+      if (collectionId && results.length > 0) {
+        const collectionResponse = results[1]; 
+        collectionMovies = collectionResponse?.data?.parts || [];
+      }
+      console.log(collectionMovies);
+      // Gabung Array
+      const combinedMovies = [...collectionMovies, ...similarMovies];
+      console.log(combinedMovies);
+        dispatch(fetchSuccess(combinedMovies));
+      
+
     } catch (error) {
-      console.log(error);
+      toast.error("Gagal mengambil data related movies:", error);
     }
   };
+  
+  useEffect(() => {
 
-  if (movieId) {
-    fetchCollectionMovies();
-  }
 
-}, [dispatch,movieId]);
+    
+
+    fetchMovies();
+
+
+
+  }, [dispatch, id, collectionId]);
 
   return (
     <div>
-      <SimilarMoviesView 
-       data={data}
+      <SimilarMoviesView
+       data={combinedRelatedMovies}
        loading={loading}
        error={error}
-       collection={collection}
       />
     </div>
-  )
-}
+  );
+};
 
-export default SimilarMovies
+export default SimilarMovies;

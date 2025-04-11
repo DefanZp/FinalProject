@@ -2,26 +2,41 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     data: [],
-    loading: true,
+    loading: false, 
     error: null,
-}
+    collectionId: null
+};
 
 const SimilarMoviesSlice = createSlice({
     name: "similarMovies",
     initialState,
     reducers: {
-        fetchSuccess: (state, action) => {
-            state.loading = false;
-            state.data = action.payload;
+        
+        fetchStart: (state) => {
+            state.loading = true;
+            state.error = null;
+            state.data = []; 
         },
 
+        fetchCollectionId: (state, action) => {
+            state.collectionId = action.payload;
+        },
+      
+        fetchSuccess: (state, action) => {
+            state.loading = false;
+            state.data = action.payload; 
+            state.error = null;
+        },
+        
         fetchError: (state, action) => {
             state.loading = false;
             state.error = action.payload;
+            state.data = []; 
         }
     }
-})
+});
 
-export const {fetchSuccess, fetchError} = SimilarMoviesSlice.actions;
 
-export default SimilarMoviesSlice.reducer
+export const { fetchStart, fetchSuccess, fetchError, fetchCollectionId } = SimilarMoviesSlice.actions;
+
+export default SimilarMoviesSlice.reducer;

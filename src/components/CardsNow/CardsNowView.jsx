@@ -51,8 +51,8 @@ const CardsNowView = ({ data, loading, }) => {
               <div
                 className="flex-none w-44 h-60 lg:w-48 lg:h-60 rounded-md "
                 style={{
-                  backgroundImage: movie.backdrop_path 
-                  ? `linear-gradient(to bottom, rgba(0,0,0,0) 30%, rgba(0,0,0,0.7) 100%), url(https://image.tmdb.org/t/p/w500${movie.backdrop_path})`
+                  backgroundImage: movie.poster_path 
+                  ? `linear-gradient(to bottom, rgba(0,0,0,0) 30%, rgba(0,0,0,0.7) 100%), url(https://image.tmdb.org/t/p/w500${movie.poster_path})`
                   : "linear-gradient(to bottom, rgba(0,0,0,0) 30%, rgba(0,0,0,0.7) 100%),url(https://149348893.v2.pressablecdn.com/wp-content/uploads/2019/03/no-image-available.png)",
                   backgroundSize: "cover",
                   backgroundPosition: "center",

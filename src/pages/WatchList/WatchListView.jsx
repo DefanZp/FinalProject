@@ -13,8 +13,8 @@ const FavoriteView = ({
   return (
     <>
       <Navbar />
-      <section className="py-16">
-        <div className="px-28">
+      <section className="pt-24 pb-16">
+        <div className="px-6 lg:px-28">
           <h1 className="text-2xl font-semibold mb-6">My Watchlist</h1>
           <div className="flex flex-row items-center gap-4 mb-10">
             <h1 className="text-sm">Watchlist Movies</h1>
@@ -25,10 +25,10 @@ const FavoriteView = ({
             </button>
             </Link>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
+          <div className="grid gap-y-10 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {watchlist.length > 0 ? (
               watchlist.map((movie) => (
-                <div className="relative w-56" key={movie.id}>
+                <div className="relative w-40 lg:w-56" key={movie.id}>
                   <Link to={`/detail/${movie.id}`}>
                     <img
                       src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
